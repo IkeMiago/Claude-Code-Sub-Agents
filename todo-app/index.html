@@ -13,14 +13,26 @@
       </header>
 
       <form class="todo-form" id="todo-form" autocomplete="off">
-        <input
-          type="text"
-          id="new-todo"
-          name="new-todo"
-          placeholder="What needs to be done?"
-          aria-label="New todo"
-        />
-        <button type="submit" class="add-btn">追加</button>
+        <div class="todo-form-main">
+          <input
+            type="text"
+            id="new-todo"
+            name="new-todo"
+            placeholder="What needs to be done?"
+            aria-label="New todo"
+          />
+          <button type="submit" class="add-btn">追加</button>
+        </div>
+        <div class="todo-form-deadline">
+          <label for="new-deadline" class="deadline-form-label">締切日</label>
+          <input
+            type="date"
+            id="new-deadline"
+            name="new-deadline"
+            aria-label="締切日"
+            class="deadline-form-input"
+          />
+        </div>
       </form>
 
       <section class="todo-list-section" id="todo-list-section" hidden>

@@ -95,7 +95,44 @@ h1 {
 .todo-form {
   padding: 0 var(--space-lg) var(--space-md);
   display: flex;
+  flex-direction: column;
   gap: var(--space-sm);
+}
+
+.todo-form-main {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* 締切日入力行 */
+.todo-form-deadline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.deadline-form-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.deadline-form-input {
+  padding: var(--space-xs) var(--space-sm);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background-color: var(--color-card);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.deadline-form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(91, 127, 255, 0.15);
 }
 
 #new-todo {
@@ -157,6 +194,15 @@ h1 {
   transition: background-color var(--transition);
 }
 
+/* テキストと締切日を縦並びにするコンテンツエリア */
+.todo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
 .todo-item:hover {
   background-color: rgba(91, 127, 255, 0.04);
 }
@@ -174,7 +220,6 @@ h1 {
 }
 
 .todo-item label {
-  flex: 1;
   cursor: pointer;
   word-break: break-word;
   transition: color var(--transition);
@@ -187,7 +232,6 @@ h1 {
 }
 
 .todo-item .edit-input {
-  flex: 1;
   padding: var(--space-sm);
   border: 2px solid var(--color-primary);
   border-radius: var(--radius);
@@ -196,6 +240,66 @@ h1 {
 
 .todo-item .edit-input:focus {
   outline: none;
+}
+
+/* =========================================================
+   締切日表示
+   ========================================================= */
+
+/* 締切日テキスト（クリックで編集可） */
+.todo-deadline {
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: color var(--transition);
+  user-select: none;
+}
+
+.todo-deadline:hover {
+  text-decoration: underline;
+}
+
+/* 期限未設定 */
+.todo-deadline.no-deadline {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* 期限内 */
+.todo-deadline.upcoming {
+  color: #27ae60;
+}
+
+/* 本日期限 */
+.todo-deadline.today {
+  color: #e67e22;
+  font-weight: 600;
+}
+
+/* 期限超過 */
+.todo-deadline.overdue {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+/* 完了済みTODOの締切日は薄く表示 */
+.todo-item.completed .todo-deadline {
+  color: var(--color-completed);
+  text-decoration: none;
+}
+
+/* 締切日インライン編集インプット */
+.deadline-edit-input {
+  padding: var(--space-xs) var(--space-sm);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-card);
+  cursor: pointer;
+}
+
+.deadline-edit-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 127, 255, 0.15);
 }
 
 /* =========================================================
@@ -300,6 +404,10 @@ h1 {
 
   .todo-form {
     padding: 0 var(--space-md) var(--space-md);
+  }
+
+  .deadline-form-label {
+    display: none;
   }
 
   .todo-item {
